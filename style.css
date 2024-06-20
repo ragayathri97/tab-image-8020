@@ -1,0 +1,139 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.tab-img {
+    position: relative;
+    max-width: 1300px;
+    padding: 100px 0px;
+    margin: 0 auto;
+}
+.img-prt-elmt {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+.img-prt-elmt::before, .img-prt-elmt::after{
+    content: "";
+    position: absolute;
+    background: #fff;
+    height: 100%;
+    top: 0px;
+    right: 0px;
+    z-index: 1;
+}
+.img-prt-elmt::before{
+    opacity: .6;
+    width: 25% ;
+}
+.img-prt-elmt::after{
+    width: 15% ;
+}
+
+.img-container {
+    display: flex;
+    transition: transform 0.5s ease; /* Moved transition property to CSS */
+}
+
+.img-container div {
+    min-width: 24%; /* Show 3 images at a time */
+    max-width: 300px;
+    margin: 0px 5px;
+}
+
+.img-container img {
+    display: block;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.flex-element {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 50px;
+}
+.list-prt-elmt {
+    width: 20%;
+}
+.img-prt-elmt {
+    width: 75%;
+}
+
+.list-prt-elmt ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    list-style-type: none;
+    padding: 0;
+}
+
+.list-prt-elmt li {
+    width: 50%;
+    cursor: pointer;
+    padding: 10px;
+    background: #ddd;
+    margin: 5px;
+    border-radius: 5px;
+    transition: 0.3s;
+    text-align: center;
+}
+.list-prt-elmt li.active {
+    background: #aaa; /* Change to whatever highlight color you want */
+}
+
+.num-controls {
+    font-size: 30px;
+    position: relative;
+    left: 150px;
+}
+.num-controls .total-num {
+    font-size: 20px;
+}
+.controls {
+    position: absolute;
+    bottom: 15%;
+    left: 25%;
+}
+
+.prev, .next {
+    cursor: pointer;
+    font-size: 24px;
+    user-select: none;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+/* .controls{
+    position: relative;
+    z-index: 1;
+}
+
+.controls::before{
+    position: absolute;
+    content: "";
+    width: 10px;
+    height: 10px;
+    padding: 10px;
+    border-left: 1px solid #000;
+    border-bottom: 1px solid #000;
+    transform: rotate(-45deg);
+    bottom: 10px;
+    left: 0px;
+    z-index: -1;
+}
+
+.controls::after{
+    position: absolute;
+    content: "";
+    width: 10px;
+    height: 10px;
+    padding: 10px;
+    border-left: 1px solid #000;
+    border-bottom: 1px solid #000;
+    transform: rotate(-45deg);
+    bottom: 20px;
+    left: 0px;
+    z-index: -1;
+} */

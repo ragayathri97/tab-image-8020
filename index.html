@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tab-image-8020</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section class="tab-img">
+        <div class="flex-element">
+            <div class="list-prt-elmt">
+                <ul>
+                    <li data-index="1">Img 1</li>
+                    <li data-index="2">Img 2</li>
+                    <li data-index="3">Img 3</li>
+                    <li data-index="4">Img 4</li>
+                    <li data-index="5">Img 5</li>
+                    <li data-index="6">Img 6</li>
+                </ul>
+            </div>
+            <div class="img-prt-elmt">
+                <div class="img-container">
+                    <div><img src="https://placehold.jp/225x350.png?text=img1" alt="Img 1"></div>
+                    <div><img src="https://placehold.jp/225x350.png?text=img2" alt="Img 2"></div>
+                    <div><img src="https://placehold.jp/225x350.png?text=img3" alt="Img 3"></div>
+                    <div><img src="https://placehold.jp/225x350.png?text=img4" alt="Img 4"></div>
+                    <div><img src="https://placehold.jp/225x350.png?text=img5" alt="Img 5" ></div>
+                    <div><img src="https://placehold.jp/225x350.png?text=img6" alt="Img 6"></div>
+                </div>
+            </div>
+            <div class="controls">
+                <span class="prev">❮</span>
+                <span class="next">❯</span>
+            </div>
+            <div class="num-controls">
+                <span class="current-num">1</span>/
+                <span class="total-num">6</span>
+            </div>
+            
+        </div>
+</section>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+
+$(document).ready(function () {
+let currentIndex = 0;
+const images = $('.img-container div');
+const listItems = $('.list-prt-elmt li');
+const totalImages = images.length;
+const visibleImages = 4;
+const interval = 5000;
+let autoSlide;
+
+images.slice(0, visibleImages).clone().appendTo('.img-container');
+
+function updateActiveClass() {
+listItems.removeClass('active').eq(currentIndex % totalImages).addClass('active');
+images.removeClass('active').slice(currentIndex, currentIndex + visibleImages).addClass('active');
+$('.current-num').text((currentIndex % totalImages) + 1);
+}
+
+function showImage(index) {
+const offset = -(index % (totalImages + visibleImages)) * 100 / visibleImages;
+$('.img-container').css('transform', `translateX(${offset}%)`);
+updateActiveClass();
+}
+
+function nextImage() {
+currentIndex++;
+showImage(currentIndex);
+if (currentIndex >= totalImages) {
+    setTimeout(() => {
+        $('.img-container').css('transition', 'none');
+        currentIndex = 0;
+        showImage(currentIndex);
+        setTimeout(() => $('.img-container').css('transition', ''), 50);
+    }, 500);
+}
+}
+
+function prevImage() {
+currentIndex = (currentIndex === 0) ? totalImages - 1 : currentIndex - 1;
+showImage(currentIndex);
+}
+
+function startAutoSlide() {
+autoSlide = setInterval(nextImage, interval);
+}
+
+function stopAutoSlide() {
+clearInterval(autoSlide);
+}
+
+$('.next').click(function () {
+stopAutoSlide();
+nextImage();
+startAutoSlide();
+});
+
+$('.prev').click(function () {
+stopAutoSlide();
+prevImage();
+startAutoSlide();
+});
+
+$('.list-prt-elmt li').click(function () {
+stopAutoSlide();
+currentIndex = $(this).index();
+showImage(currentIndex);
+startAutoSlide();
+});
+
+updateActiveClass();
+showImage(currentIndex);
+startAutoSlide();
+});
+
+
+</script>
+    
+</body>
+</html>
